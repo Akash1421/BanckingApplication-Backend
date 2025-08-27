@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: BankingApplication
+  description: Api for the Banking Application
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /employee:
+    get:
+      summary: Get all employees
+      responses:
+        "200":
+          description: List of employees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+  /employee/{id}:
+    get:
