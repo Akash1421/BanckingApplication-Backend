@@ -1,0 +1,117 @@
+openapi: 3.0.1
+info:
+  title: BankingApplication
+  description: Api for the Banking Application
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /employee:
+    get:
+      summary: Get all employees
+      tags:
+        - Employee
+      responses:
+        '200':
+          description: List of employees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmployeeResponse'
+    post:
+      summary: create a new employee
+      tags:
+        - Employee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRequest'
+      responses:
+        '201':
+          description: Employee created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+  /employee/{id}:
+    get:
+      summary: Get employee by Id
+      tags:
+        - Employee
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Employee details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+    put:
+      summary: Update employee
+      tags:
+        - Employee
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRequest'
+      responses:
+        '200':
+          description: Employee updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+    delete:
+      summary: delete employee
+      tags:
+        - Employee
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Employee deleted
+components:
+  schemas:
+    EmployeeRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Alice"
+        role:
+          type: string
+          example: "Developer"
+    EmployeeResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Alice"
+        role:
+          type: string
+          example: "Developer"
+
